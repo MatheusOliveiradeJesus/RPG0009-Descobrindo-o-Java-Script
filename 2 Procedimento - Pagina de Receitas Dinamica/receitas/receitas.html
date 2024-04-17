@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Receitas</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffc107;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 60px;
+        }
+
+        .card {
+            margin-top: 20px;
+            width: 350px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body onload="preencheCatalogo()">
+    <h1>Catálogo de Receitas</h1>
+    <div class="container">
+        <div id="pnlCatalogo" class="row justify-content-around"></div>
+    </div>
+
+    <script>
+        var receitas = [
+            {
+                titulo: "Crepioca de Banana",
+                imagem: "foto_receita1.png",
+                preparo: "Em uma tigela, misture o ovo, a tapioca, a banana e a canela. Aqueça uma frigideira antiaderente untada com óleo em fogo médio e despeje a mistura de tapioca. Cozinhe até firmar. Coloque a banana e a canela e dobre ao meio. Sirva!",
+                ingredientes: ["Ovo", "Farinha de Tapioca", "Banana Amassada", "Banana em Rodelas", "Canela em Pó"]
+            }
+            ,
+            {
+                titulo: "Crepioca de Espinafre Fit",
+                imagem: "foto_receita2.png",
+                preparo: "Bata os ingredientes da massa até dar o ponto. Despeje em uma frigideira antiaderente. Espere assar e vire para dourar do outro lado. Retire e recheie com a mistura de espinafre, cenoura e queijo. Sirva!",
+                ingredientes: ["Ovo", "Goma de Tapioca", "Requeijão Light", "Queijo Parmesão Ralado", "Espinafre", "Cenoura Crua", "Cubos de Queijo"]
+            }
+            ,
+            {
+                titulo: "Sorvete de Limão Light",
+                imagem: "foto_receita3.png",
+                preparo: "Bata no liquidificador todos os ingredientes, adicionando um a um. Coloque em um recipiente recipiente e leve ao congelador por cinco horas ou até ficar consistentes. Retire e bata na batedeira rapidamente. Volte ao congelador por mais 1 hora. Se desejar, decore com folhas de hortelã. Sirva!",
+                ingredientes: ["Iorgute Light", "Suco de Limão", "Raspas de Limão", "Açúcar", "Leite em Pó", "Leite Condensado"]
+            }
+        ];
+
+        function getListaIngredientes(receita) {
+            let listaHTML = '<ul>';
+            listaHTML += receita.ingredientes.map(ingrediente => `<li>${ingrediente}</li>`).join('');
+            listaHTML += '</ul>';
+            return listaHTML;
+        }
+
+        function getCard(receita) {
+            return `
+                <div class="card">
+                    <img src="${receita.imagem}" class="card-img-top" alt="${receita.titulo}">
+                    <div class="card-body">
+                        <h5 class="card-title">${receita.titulo}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted"></h6>
+                        <div class="card-text">
+                            ${getListaIngredientes(receita)}
+                        </div>
+                        <hr>
+                        <p class="card-text">${receita.preparo}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function preencheCatalogo() {
+            var pnlCatalogo = document.getElementById("pnlCatalogo");
+            var htmlReceitas = receitas.map(receita => getCard(receita)).join('');
+            pnlCatalogo.innerHTML = htmlReceitas;
+        }
+    </script>
+</body>
+
+</html>

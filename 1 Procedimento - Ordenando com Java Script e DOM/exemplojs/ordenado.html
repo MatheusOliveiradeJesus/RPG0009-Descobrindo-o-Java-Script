@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordenando Valores</title>
+    <link rel="stylesheet" href="ordenado.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <h2>Ordenando Valores</h2>
+
+        <div class="form-group">
+            <input type="text" id="numeroInput" class="form-control" placeholder="Insira um número">
+            <button onclick="adicionarNumero()" class="btn btn-primary mt-3">Adicionar</button>
+        </div>
+
+        <hr>
+
+        <ul id="listaNumeros" class="mb-3"></ul>
+
+        <div class="form-group">
+            <select id="selectOrdenacao" class="form-control">
+                <option value="bubble">Bubble Sort</option>
+                <option value="selection">Selection Sort</option>
+                <option value="quick">Quick Sort</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <button onclick="ordenarLista()" class="btn btn-primary">Ordenar</button>
+            <button onclick="misturarLista()" class="btn btn-primary">Misturar</button>
+        </div>
+    </div>
+
+    <script src="ordenado.js"></script>
+
+</body>
+
+</html>

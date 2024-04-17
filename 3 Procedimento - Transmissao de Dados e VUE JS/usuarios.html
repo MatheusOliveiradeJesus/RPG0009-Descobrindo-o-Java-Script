@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuários de Teste via REST</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffc107;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        h6 {
+            color: #fff;
+        }
+
+        .card {
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app" class="container">
+        <h1>Usuários de Teste via REST</h1>
+        <h6>Os usuários deste exemplo são fornecidos pela API de testes reqres.in</h6>
+
+        <div class="row">
+            <div class="col-md-4" v-for="user in users" :key="user.id">
+                <div class="card">
+                    <img :src="user.avatar" class="card-img-top" alt="Avatar" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+                        <p class="card-text">E-mail: {{ user.email }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                users: []
+            },
+            mounted() {
+                this.loadUsers();
+            },
+            methods: {
+                loadUsers() {
+                    fetch('https://reqres.in/api/users?per_page=10')
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data && data.data && Array.isArray(data.data)) {
+                                this.users = data.data;
+                            } else {
+                                console.error('Dados inválidos retornados pela API:', data);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Erro ao carregar os usuários:', error);
+                        });
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
